@@ -30,8 +30,9 @@ var giphyurl = "https://api.giphy.com/v1/gifs/search?q=" + buttNum +
         var gifsImage = $('<img>');
         //creates an image element and stores it into the var gifsImage
         gifsImage.attr('src', results[i].images.fixed_height_still.url);
-        $(this).on("click", function() {
-            gifsImage.attr('src', results[i].images.fixed_height.url);
+        gifsImage.on("click", function() {
+            //gifsImage.attr.hide();
+            $(this).attr('src', $(this).attr(results[i].images.fixed_height.url));
         });
         //the image will receive a new src attribute and receive the src value
         //the src value is received from accessing the results array's props: Images -> fixed height -> url
