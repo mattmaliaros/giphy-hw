@@ -3,9 +3,12 @@ var topics = ['Michael Jordan', 'Lebron James', 'Andre Iguodala', 'Steph Curry',
 function createTopics () {
 for(var i = 0; i < topics.length; i++)
 {
+    var div = $('<div>');
     var button = $('<button>');
     button.attr('id', "button" + i);
-    console.log(button.text(topics[i]));
+    button.text(topics[i]);
+    div.append(button);
+
 }
 }
 createTopics();
