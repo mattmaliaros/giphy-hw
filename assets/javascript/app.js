@@ -1,5 +1,6 @@
 var topics = ['Michael Jordan', 'Lebron James', 'Andre Iguodala', 'Steph Curry', 'Kobe Bryant', 'Dwayne Wade', 'Kevin Durant',
 'Damian Lillard', 'Russell Westbrook', 'Tracy McGrady'];
+$("#submit").on("click")
 function createTopics () {
 for(var i = 0; i < topics.length; i++)
 {
@@ -28,11 +29,19 @@ var giphyurl = "https://api.giphy.com/v1/gifs/search?q=" + buttNum +
         var fun = $('<div>');
         //creates a div element and stores it into var fun
         var gifsImage = $('<img>');
+        gifsImage.attr('value', i);
         //creates an image element and stores it into the var gifsImage
         gifsImage.attr('src', results[i].images.fixed_height_still.url);
+        var gifsImageRating = results[i].rating;
         gifsImage.on("click", function() {
             //gifsImage.attr.hide();
-            $(this).attr('src', $(this).attr(results[i].images.fixed_height.url));
+            //console.log($(this).attr('value'));
+          if ($(this).attr('src') == results[$(this).attr('value')].images.fixed_height.url){
+            $(this).attr('src', results[$(this).attr('value')].images.fixed_height_still.url)
+          }
+          else{
+            $(this).attr('src', results[$(this).attr('value')].images.fixed_height.url);
+          }
         });
         //the image will receive a new src attribute and receive the src value
         //the src value is received from accessing the results array's props: Images -> fixed height -> url
@@ -40,8 +49,12 @@ var giphyurl = "https://api.giphy.com/v1/gifs/search?q=" + buttNum +
         //the data-animate value is received from accessing the results array's props: Images -> fixed height -> url
         //gives the image a class of 'gif'
         fun.append(gifsImage);
+        fun.append($('<br>'));
+        fun.append("Rating : " + gifsImageRating);
+        
         //appends the image into the fun variable (a div element)
         $('#gif').prepend(fun);
+        
         }
         $('#gif').fadeIn();
       });
