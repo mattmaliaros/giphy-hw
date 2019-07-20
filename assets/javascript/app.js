@@ -1,9 +1,17 @@
 var topics = ['Michael Jordan', 'Lebron James', 'Andre Iguodala', 'Steph Curry', 'Kobe Bryant', 'Dwayne Wade', 'Kevin Durant',
 'Damian Lillard', 'Russell Westbrook', 'Tracy McGrady'];
-$("#submit").on("click")
+$("#submit").on("click", function() {
+  $('#div').empty();
+  var userInput = $('#searchBox').val();
+  topics.push(userInput);
+  var buttonInsert = $('<button></button>').text(userInput);
+  $('#div').append(buttonInsert);
+  createTopics();
+});
 function createTopics () {
 for(var i = 0; i < topics.length; i++)
 {
+
     var div = $("#div");
     var button = $('<button></button>').text(topics[i]);
     var buttId = button.attr('id', "button" + i);
@@ -43,11 +51,6 @@ var giphyurl = "https://api.giphy.com/v1/gifs/search?q=" + buttNum +
             $(this).attr('src', results[$(this).attr('value')].images.fixed_height.url);
           }
         });
-        //the image will receive a new src attribute and receive the src value
-        //the src value is received from accessing the results array's props: Images -> fixed height -> url
-        //the image will receive a new data-animate attr and receive the data-animate value
-        //the data-animate value is received from accessing the results array's props: Images -> fixed height -> url
-        //gives the image a class of 'gif'
         fun.append(gifsImage);
         fun.append($('<br>'));
         fun.append("Rating : " + gifsImageRating);
